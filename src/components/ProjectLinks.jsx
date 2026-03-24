@@ -2,20 +2,16 @@ import "./ProjectLinks.css";
 
 function ProjectLinks() {
   return (
-    <section className="project-links submit-section">
+    <section className="project-links">
       <div>
         <p className="section-label">Main 242 Home Page Section</p>
-        <h2>Add this React build to your project section</h2>
-        <p className="submit-copy">
-          Replace these placeholders with your final GitHub Pages deployment and
-          the new repository link before you submit.
-        </p>
+        <h2>Project links ready for your portfolio page</h2>
       </div>
 
       <div className="project-link-grid">
         <a
           className="project-link-card"
-          href="https://username.github.io/shelfspace-react-site/"
+          href="https://github.com/mmhughes2/ShelfSpace"
           target="_blank"
           rel="noreferrer"
         >
