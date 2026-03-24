@@ -1,0 +1,36 @@
+.shelf-book-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 16px;
+  border: 1px solid #e7e5de;
+  border-radius: 10px;
+  background: #fcfcfb;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.shelf-book-row img {
+  width: 62px;
+  height: 92px;
+  object-fit: cover;
+}
+
+.shelf-book-row h3 {
+  margin: 0 0 4px;
+  font-size: clamp(2rem, 4vw, 3.3rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: #555;
+  text-shadow: 0 3px 5px rgba(0, 0, 0, 0.14);
+}
+
+.shelf-book-row p {
+  margin: 0;
+  color: #555;
+}
+
+@media (max-width: 720px) {
+  .shelf-book-row h3 {
+    font-size: 2rem;
+  }
+}

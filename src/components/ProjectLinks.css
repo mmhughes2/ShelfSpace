@@ -1,0 +1,53 @@
+.project-links {
+  padding: 1.7rem;
+  border-radius: 20px;
+  background: #fafaf9;
+  border: 1px solid #e7e5de;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  color: #0f0f0f;
+  display: grid;
+  gap: 1.4rem;
+}
+
+.project-links h2 {
+  margin: 0;
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  letter-spacing: -0.05em;
+}
+
+.submit-copy {
+  margin: 0.75rem 0 0;
+  color: #5c5c59;
+}
+
+.project-link-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.project-link-card {
+  padding: 1.25rem;
+  border-radius: 14px;
+  background: #f5f5f3;
+  border: 1px solid #e1dfd8;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.project-link-card span {
+  color: #76766f;
+  font-size: 0.84rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.project-link-card strong {
+  font-size: 1.08rem;
+}
+
+@media (max-width: 760px) {
+  .project-link-grid {
+    grid-template-columns: 1fr;
+  }
+}

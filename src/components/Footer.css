@@ -1,0 +1,37 @@
+.site-footer {
+  width: min(calc(100% - 48px), 1260px);
+  margin: 0 auto;
+  padding: 20px 0 34px;
+}
+
+.footer-topline,
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.footer-topline {
+  justify-content: space-between;
+  padding: 22px 0 28px;
+  border-top: 1px solid #e5e4dd;
+}
+
+.footer-wordmark {
+  padding-top: 24px;
+  font-size: clamp(3rem, 6vw, 4.8rem);
+  font-weight: 900;
+  letter-spacing: -0.09em;
+  line-height: 0.92;
+}
+
+@media (max-width: 900px) {
+  .site-footer {
+    width: min(calc(100% - 28px), 1260px);
+  }
+
+  .footer-topline {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

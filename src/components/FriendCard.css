@@ -1,0 +1,22 @@
+.friend-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.friend-item img {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.friend-name {
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+}
+
+.friend-handle {
+  color: #5d5d5d;
+}
