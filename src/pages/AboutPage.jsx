@@ -1,6 +1,8 @@
 import "./AboutPage.css";
 
 function AboutPage() {
+  const base = import.meta.env.BASE_URL;
+
   return (
     <div className="about-page">
       <section className="about-hero-section">
@@ -10,7 +12,7 @@ function AboutPage() {
           <div className="story-grid">
             <div className="story-image-wrap">
               <img
-                src="/assets/profile/profile.png"
+                src={`${base}assets/profile/profile.png`}
                 alt="Founder portrait"
                 className="story-image"
               />
@@ -43,19 +45,19 @@ function AboutPage() {
           <div className="gallery-grid">
             <figure className="gallery-card">
               <img
-                src="/assets/profile/friend1.png"
+                src={`${base}assets/profile/friend1.png`}
                 alt="ShelfSpace member smiling with a book"
               />
             </figure>
             <figure className="gallery-card">
               <img
-                src="/assets/profile/friend2.png"
+                src={`${base}assets/profile/friend2.png`}
                 alt="ShelfSpace member browsing on a device"
               />
             </figure>
             <figure className="gallery-card">
               <img
-                src="/assets/profile/friend3.png"
+                src={`${base}assets/profile/friend3.png`}
                 alt="ShelfSpace community member portrait"
               />
             </figure>

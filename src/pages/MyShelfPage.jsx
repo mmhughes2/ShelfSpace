@@ -3,6 +3,8 @@ import { shelfBooks } from "../data/mockItems";
 import "./MyShelfPage.css";
 
 function MyShelfPage() {
+  const base = import.meta.env.BASE_URL;
+
   return (
     <div className="myshelf-page">
       <section className="myshelf-hero">
@@ -20,7 +22,7 @@ function MyShelfPage() {
             <h2>Currently Reading...</h2>
             <div className="reading-layout">
               <img
-                src="/assets/myshelf/current-book.jpg"
+                src={`${base}assets/myshelf/current-book.jpg`}
                 alt="The Let Them Theory book cover"
                 className="reading-cover"
               />
@@ -81,7 +83,7 @@ function MyShelfPage() {
           <div className="shelf-layout">
             <div className="bookshelf-art">
               <img
-                src="/assets/myshelf/bookshelf.png"
+                src={`${base}assets/myshelf/bookshelf.png`}
                 alt="Books lined up on a shelf"
               />
             </div>

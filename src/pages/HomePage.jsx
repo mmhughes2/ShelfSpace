@@ -4,6 +4,8 @@ import { homeTestimonials } from "../data/mockItems";
 import "./HomePage.css";
 
 function HomePage() {
+  const base = import.meta.env.BASE_URL;
+
   return (
     <div className="home-page">
       <section className="home-hero">
@@ -24,7 +26,7 @@ function HomePage() {
 
           <div className="hero-image-card">
             <img
-              src="/assets/homepage/books.png"
+              src={`${base}assets/homepage/books.png`}
               alt="A row of books on a colorful background"
             />
           </div>
@@ -47,7 +49,7 @@ function HomePage() {
 
           <div className="feature-visual">
             <img
-              src="/assets/homepage/app-preview1.png"
+              src={`${base}assets/homepage/app-preview1.png`}
               alt="ShelfSpace dashboard preview"
             />
           </div>
@@ -56,7 +58,7 @@ function HomePage() {
         <section className="feature feature-split reverse">
           <div className="feature-visual">
             <img
-              src="/assets/homepage/app-preview2.png"
+              src={`${base}assets/homepage/app-preview2.png`}
               alt="ShelfSpace community preview"
             />
           </div>
@@ -90,7 +92,7 @@ function HomePage() {
 
           <div className="iframe-card static-card">
             <img
-              src="/assets/homepage/books.png"
+              src={`${base}assets/homepage/books.png`}
               alt="ShelfSpace featured reading view"
             />
           </div>

@@ -1,3 +1,5 @@
+const base = import.meta.env.BASE_URL;
+
 export const homeTestimonials = [
   {
     quote: "ShelfSpace completely changed how I read.",
@@ -20,17 +22,17 @@ export const shelfBooks = [
   {
     title: "Honey & Spice",
     author: "Bolu Babalola",
-    image: "/assets/myshelf/book-honey-spice.jpg",
+    image: `${base}assets/myshelf/book-honey-spice.jpg`,
   },
   {
     title: "The Bluest Eye",
     author: "Toni Morrison",
-    image: "/assets/myshelf/book-bluest-eye.jpg",
+    image: `${base}assets/myshelf/book-bluest-eye.jpg`,
   },
   {
     title: "The Blood of Emmett Till",
     author: "Timothy B. Tyson",
-    image: "/assets/myshelf/book-emmett-till.jpg",
+    image: `${base}assets/myshelf/book-emmett-till.jpg`,
   },
 ];
 
@@ -44,7 +46,7 @@ export const exploreBooks = [
     section: "popular",
     tagline:
       "Sharp chemistry, campus chaos, and a very addictive fake-dating setup.",
-    image: "/assets/myshelf/book-honey-spice.jpg",
+    image: `${base}assets/myshelf/book-honey-spice.jpg`,
   },
   {
     id: 2,
@@ -55,7 +57,7 @@ export const exploreBooks = [
     section: "popular",
     tagline:
       "A powerful classic that stays with readers long after the last page.",
-    image: "/assets/myshelf/book-bluest-eye.jpg",
+    image: `${base}assets/myshelf/book-bluest-eye.jpg`,
   },
   {
     id: 3,
@@ -66,7 +68,7 @@ export const exploreBooks = [
     section: "popular",
     tagline:
       "A gripping look at one of the most important stories in American history.",
-    image: "/assets/myshelf/book-emmett-till.jpg",
+    image: `${base}assets/myshelf/book-emmett-till.jpg`,
   },
   {
     id: 4,
@@ -77,7 +79,7 @@ export const exploreBooks = [
     section: "popular",
     tagline:
       "A motivating mindset reset focused on peace, control, and everyday growth.",
-    image: "/assets/myshelf/current-book.jpg",
+    image: `${base}assets/myshelf/current-book.jpg`,
   },
   {
     id: 5,
@@ -88,7 +90,7 @@ export const exploreBooks = [
     section: "chosen",
     tagline:
       "Magic, rebellion, and unforgettable stakes in a high-energy fantasy world.",
-    image: "/assets/profile/book1.png",
+    image: `${base}assets/profile/book1.png`,
   },
   {
     id: 6,
@@ -99,7 +101,7 @@ export const exploreBooks = [
     section: "chosen",
     tagline:
       "A sweeping dragon-filled fantasy with rich worldbuilding and huge emotional payoff.",
-    image: "/assets/profile/book2.jpg",
+    image: `${base}assets/profile/book2.jpg`,
   },
   {
     id: 7,
@@ -110,7 +112,7 @@ export const exploreBooks = [
     section: "chosen",
     tagline:
       "A warm, stylish reread for anyone craving clever dialogue and romantic tension.",
-    image: "/assets/myshelf/book-honey-spice.jpg",
+    image: `${base}assets/myshelf/book-honey-spice.jpg`,
   },
   {
     id: 8,
@@ -121,7 +123,7 @@ export const exploreBooks = [
     section: "chosen",
     tagline:
       "A deeply reflective pick for readers looking for layered discussion and analysis.",
-    image: "/assets/myshelf/book-bluest-eye.jpg",
+    image: `${base}assets/myshelf/book-bluest-eye.jpg`,
   },
 ];
 
@@ -129,16 +131,16 @@ export const friends = [
   {
     name: "Victoria Anderson",
     handle: "@FictionFlirt",
-    image: "/assets/profile/friend1.png",
+    image: `${base}assets/profile/friend1.png`,
   },
   {
     name: "Michael Taylor",
     handle: "@PlotTwistKing",
-    image: "/assets/profile/friend2.png",
+    image: `${base}assets/profile/friend2.png`,
   },
   {
     name: "Fernando Suarez",
     handle: "@CoffeeandChapters",
-    image: "/assets/profile/friend3.png",
+    image: `${base}assets/profile/friend3.png`,
   },
 ];

@@ -3,13 +3,15 @@ import { friends } from "../data/mockItems";
 import "./ProfilePage.css";
 
 function ProfilePage() {
+  const base = import.meta.env.BASE_URL;
+
   return (
     <div className="profile-page-shell">
       <main className="profile-page">
         <section className="panel profile-card">
           <div className="profile-left">
             <img
-              src="/assets/profile/profile.png"
+              src={`${base}assets/profile/profile.png`}
               alt="Sasha Jordan"
               className="profile-photo"
             />
@@ -42,12 +44,15 @@ function ProfilePage() {
 
             <div className="clubs-layout">
               <div className="club-book">
-                <img src="/assets/profile/club1.png" alt="Romance Reads Club" />
+                <img
+                  src={`${base}assets/profile/club1.png`}
+                  alt="Romance Reads Club"
+                />
               </div>
 
               <div className="club-book">
                 <img
-                  src="/assets/profile/club2.png"
+                  src={`${base}assets/profile/club2.png`}
                   alt="Mystery and Thriller Society"
                 />
               </div>
@@ -135,7 +140,7 @@ function ProfilePage() {
                 </div>
 
                 <img
-                  src="/assets/profile/book1.png"
+                  src={`${base}assets/profile/book1.png`}
                   alt="Children of Blood and Bone"
                   className="inline-book top-book"
                 />
@@ -145,7 +150,7 @@ function ProfilePage() {
             <div className="message-row row-right third-row">
               <div className="message-with-book reverse">
                 <img
-                  src="/assets/profile/book2.jpg"
+                  src={`${base}assets/profile/book2.jpg`}
                   alt="The Priory of the Orange Tree"
                   className="inline-book bottom-book"
                 />

@@ -8,7 +8,6 @@ import AboutPage from "./pages/AboutPage";
 
 function App() {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
@@ -18,7 +17,6 @@ function App() {
         <Route path="about" element={<AboutPage />} />
       </Route>
     </Routes>
-  </BrowserRouter>
   );
 }
 
