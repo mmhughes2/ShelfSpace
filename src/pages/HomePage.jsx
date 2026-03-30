@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import ProjectLinks from "../components/ProjectLinks";
 import ReadingMapEmbed from "../components/ReadingMapEmbed";
 import Slideshow from "../components/Slideshow";
 import TestimonialCard from "../components/TestimonialCard";
@@ -126,8 +125,6 @@ function HomePage() {
             <TestimonialCard key={item.author} {...item} />
           ))}
         </section>
-
-        <ProjectLinks />
       </main>
     </div>
   );
