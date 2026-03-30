@@ -60,9 +60,14 @@
   border: 1px solid #d8d5cd;
   border-radius: 12px;
   background: #fcfcfb;
-  padding: 0.8rem 1rem;
+  padding: 0.55rem 0.9rem;
   font-weight: 700;
   cursor: pointer;
+  color: #4c4c48;
+  min-width: 56px;
+  min-height: 48px;
+  font-size: 1.3rem;
+  line-height: 1;
 }
 
 .nav-link {

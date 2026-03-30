@@ -29,9 +29,10 @@ function SiteHeader() {
         type="button"
         aria-expanded={isMenuOpen}
         aria-controls="site-navigation"
+        aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
         onClick={() => setIsMenuOpen((open) => !open)}
       >
-        {isMenuOpen ? "Close Menu" : "Open Menu"}
+        <span aria-hidden="true">{isMenuOpen ? "\u{1F891}" : "\u{1F893}"}</span>
       </button>
 
       <nav
