@@ -1,3 +1,4 @@
+import ContactForm from "../components/ContactForm";
 import FriendCard from "../components/FriendCard";
 import { friends } from "../data/mockItems";
 import "./ProfilePage.css";
@@ -77,41 +78,12 @@ function ProfilePage() {
             <h2>Send a note to the ShelfSpace team</h2>
             <p>
               Have a recommendation, a book club idea, or feedback about the
-              site? The React version keeps the same styled layout, even though
-              forms are not required to work yet.
+              site? This React form submits in place so the user never gets
+              sent away from the design.
             </p>
           </div>
 
-          <form className="contact-form">
-            <label>
-              <span>Name</span>
-              <input type="text" name="name" />
-            </label>
-
-            <label>
-              <span>Email</span>
-              <input type="email" name="email" />
-            </label>
-
-            <label>
-              <span>Topic</span>
-              <input type="text" name="topic" />
-            </label>
-
-            <label className="message-field">
-              <span>Message</span>
-              <textarea name="message" rows="6"></textarea>
-            </label>
-
-            <div className="form-actions">
-              <button className="contact-submit" type="button">
-                Send Message
-              </button>
-              <p className="form-status">
-                Form styling included. Submission logic not required yet.
-              </p>
-            </div>
-          </form>
+          <ContactForm />
         </section>
 
         <section className="panel chat-card">

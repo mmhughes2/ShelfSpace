@@ -126,12 +126,6 @@
   line-height: 1.6;
 }
 
-.static-card {
-  background: #fdfdfb;
-  border: 1px solid #e5e4dd;
-  padding: 18px;
-}
-
 .testimonials {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

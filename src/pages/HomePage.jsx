@@ -1,10 +1,36 @@
+import { Link } from "react-router-dom";
 import ProjectLinks from "../components/ProjectLinks";
+import ReadingMapEmbed from "../components/ReadingMapEmbed";
+import Slideshow from "../components/Slideshow";
 import TestimonialCard from "../components/TestimonialCard";
 import { homeTestimonials } from "../data/mockItems";
 import "./HomePage.css";
 
 function HomePage() {
   const base = import.meta.env.BASE_URL;
+  const slides = [
+    {
+      title: "Track your reads",
+      description:
+        "A focused bookshelf view that keeps progress, goals, and favorites in one place.",
+      image: `${base}assets/homepage/books.png`,
+      alt: "ShelfSpace home book graphic",
+    },
+    {
+      title: "Build your shelf",
+      description:
+        "Preview the reading dashboard and the cozy visual style carried over from the original project.",
+      image: `${base}assets/homepage/app-preview1.png`,
+      alt: "ShelfSpace dashboard preview",
+    },
+    {
+      title: "Read with others",
+      description:
+        "Move from solo reading into community events, clubs, and shared recommendations.",
+      image: `${base}assets/homepage/app-preview2.png`,
+      alt: "ShelfSpace community preview",
+    },
+  ];
 
   return (
     <div className="home-page">
@@ -15,12 +41,12 @@ function HomePage() {
             <p>Track your pages, discover new stories, and read together.</p>
 
             <div className="hero-actions">
-              <a className="button button-primary" href="#/myshelf">
+              <Link className="button button-primary" to="/myshelf">
                 Begin Tracking
-              </a>
-              <a className="button button-secondary" href="#/profile">
+              </Link>
+              <Link className="button button-secondary" to="/profile">
                 Join a Book Club
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -42,9 +68,9 @@ function HomePage() {
               read, and discover what to read next all in one beautiful digital
               bookshelf.
             </p>
-            <a className="button button-primary" href="#/myshelf">
+            <Link className="button button-primary" to="/myshelf">
               Build your Shelf
-            </a>
+            </Link>
           </div>
 
           <div className="feature-visual">
@@ -70,32 +96,29 @@ function HomePage() {
               part in live discussions, shared reading schedules, and community
               events.
             </p>
-            <a className="button button-primary" href="#/explore">
+            <Link className="button button-primary" to="/explore">
               Explore the Community
-            </a>
+            </Link>
           </div>
         </section>
+
+        <Slideshow slides={slides} />
 
         <section className="media-section">
           <div className="media-copy">
             <p className="eyebrow">ShelfSpace Spotlight</p>
             <h2>Plan your next bookstore day</h2>
             <p>
-              The original project used an interactive map here. For Part 8,
-              this React version keeps the same section design while avoiding
-              the iframe requirement for now.
+              The interactive map is back in the React build, so the page keeps
+              the original ShelfSpace idea while meeting the Part 9 iframe
+              requirement.
             </p>
-            <a className="button button-secondary" href="#/explore">
+            <Link className="button button-secondary" to="/explore">
               Browse More Picks
-            </a>
+            </Link>
           </div>
 
-          <div className="iframe-card static-card">
-            <img
-              src={`${base}assets/homepage/books.png`}
-              alt="ShelfSpace featured reading view"
-            />
-          </div>
+          <ReadingMapEmbed />
         </section>
 
         <section className="testimonials" aria-label="Testimonials">

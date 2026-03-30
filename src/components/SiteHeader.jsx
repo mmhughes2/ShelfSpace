@@ -1,4 +1,5 @@
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import BrandMark from "./BrandMark";
 import SocialIcons from "./SocialIcons";
 import "./SiteHeader.css";
@@ -12,11 +13,32 @@ const navItems = [
 ];
 
 function SiteHeader() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
+
   return (
     <header className="site-header">
       <BrandMark />
 
-      <nav className="site-nav" aria-label="Main navigation">
+      <button
+        className="menu-toggle"
+        type="button"
+        aria-expanded={isMenuOpen}
+        aria-controls="site-navigation"
+        onClick={() => setIsMenuOpen((open) => !open)}
+      >
+        {isMenuOpen ? "Close Menu" : "Open Menu"}
+      </button>
+
+      <nav
+        id="site-navigation"
+        className={isMenuOpen ? "site-nav site-nav-open" : "site-nav"}
+        aria-label="Main navigation"
+      >
         {navItems.map((item) => (
           <NavLink
             key={item.to}
@@ -24,6 +46,7 @@ function SiteHeader() {
             className={({ isActive }) =>
               isActive ? "nav-link nav-link-active" : "nav-link"
             }
+            onClick={() => setIsMenuOpen(false)}
           >
             {item.label}
           </NavLink>
