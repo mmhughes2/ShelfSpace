@@ -1,10 +1,77 @@
+import { useEffect, useMemo, useState } from "react";
+import BookDetailModal from "../components/BookDetailModal";
 import ExploreBookCard from "../components/ExploreBookCard";
-import { exploreBooks } from "../data/mockItems";
+import { fetchBookById, fetchBooks } from "../services/booksApi";
 import "./ExplorePage.css";
 
 function ExplorePage() {
-  const popular = exploreBooks.filter((book) => book.section === "popular");
-  const chosen = exploreBooks.filter((book) => book.section === "chosen");
+  const [books, setBooks] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [selectedBook, setSelectedBook] = useState(null);
+  const [isModalLoading, setIsModalLoading] = useState(false);
+
+  useEffect(() => {
+    let ignore = false;
+
+    async function loadBooks() {
+      try {
+        setIsLoading(true);
+        setErrorMessage("");
+        const data = await fetchBooks();
+
+        if (!ignore) {
+          setBooks(data);
+        }
+      } catch (error) {
+        if (!ignore) {
+          setErrorMessage(
+            "The live ShelfSpace collection could not be loaded right now."
+          );
+        }
+      } finally {
+        if (!ignore) {
+          setIsLoading(false);
+        }
+      }
+    }
+
+    loadBooks();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
+
+  const filteredBooks = useMemo(() => {
+    const search = searchValue.trim().toLowerCase();
+
+    if (!search) {
+      return books;
+    }
+
+    return books.filter((book) =>
+      [book.title, book.author, book.genre, book.description]
+        .join(" ")
+        .toLowerCase()
+        .includes(search)
+    );
+  }, [books, searchValue]);
+
+  const spotlightBooks = filteredBooks.filter((book) => book.rating >= 4.5);
+
+  async function handleSelectBook(id) {
+    try {
+      setIsModalLoading(true);
+      const book = await fetchBookById(id);
+      setSelectedBook(book);
+    } catch (error) {
+      setErrorMessage("The selected book details could not be loaded.");
+    } finally {
+      setIsModalLoading(false);
+    }
+  }
 
   return (
     <div className="explore-page">
@@ -13,8 +80,8 @@ function ExplorePage() {
           <div className="explore-copy">
             <h1>Explore</h1>
             <p>
-              Browse fresh book picks, search by genre, and add your next
-              favorite read.
+              Browse fresh book picks from the live ShelfSpace server, search by
+              title or genre, and open each book for a full detail view.
             </p>
           </div>
 
@@ -30,52 +97,92 @@ function ExplorePage() {
                 id="searchInput"
                 type="search"
                 placeholder="Search by title, author, or genre"
+                value={searchValue}
+                onChange={(event) => setSearchValue(event.target.value)}
               />
               <button
                 className="clear-button"
                 type="button"
                 aria-label="Clear search"
+                onClick={() => setSearchValue("")}
               >
                 x
               </button>
             </label>
             <p className="results-feedback">
-              Showing styled reusable cards for the future JSON list.
+              {isLoading
+                ? "Loading the live ShelfSpace collection..."
+                : `${filteredBooks.length} books loaded from the backend.`}
             </p>
           </div>
         </div>
       </section>
 
       <main className="explore-content">
+        {errorMessage ? <p className="error-banner">{errorMessage}</p> : null}
+
         <section className="book-section">
           <div className="section-header">
-            <h2>Popular Now</h2>
+            <h2>Library Collection</h2>
             <p>
-              Trending favorites readers are adding to their shelves right now.
+              Every book in this section is now loaded from the backend instead
+              of the old local JSON file.
             </p>
           </div>
-          <div className="books-list">
-            {popular.map((book) => (
-              <ExploreBookCard key={book.id} book={book} />
-            ))}
-          </div>
+
+          {isLoading ? (
+            <div className="books-grid loading-grid">
+              <article className="skeleton-card"></article>
+              <article className="skeleton-card"></article>
+              <article className="skeleton-card"></article>
+            </div>
+          ) : filteredBooks.length === 0 ? (
+            <div className="empty-state">
+              No books matched that search. Try a different title, author, or
+              genre.
+            </div>
+          ) : (
+            <div className="books-grid">
+              {filteredBooks.map((book) => (
+                <ExploreBookCard key={book.id} book={book} onSelect={handleSelectBook} />
+              ))}
+            </div>
+          )}
         </section>
 
         <section className="book-section">
           <div className="section-header">
-            <h2>Chosen For You</h2>
+            <h2>Spotlight Picks</h2>
             <p>
-              Personalized recommendations built from the same reading vibe as
-              your library.
+              Top-rated titles from the same backend collection, presented as a
+              second styled shelf for visual variety.
             </p>
           </div>
-          <div className="books-list">
-            {chosen.map((book) => (
-              <ExploreBookCard key={book.id} book={book} />
-            ))}
-          </div>
+
+          {spotlightBooks.length === 0 ? (
+            <div className="empty-state">
+              Spotlight picks will appear here when matching high-rated books are
+              available.
+            </div>
+          ) : (
+            <div className="books-grid">
+              {spotlightBooks.map((book) => (
+                <ExploreBookCard
+                  key={`spotlight-${book.id}`}
+                  book={book}
+                  onSelect={handleSelectBook}
+                />
+              ))}
+            </div>
+          )}
         </section>
       </main>
+
+      {isModalLoading ? (
+        <div className="modal-loader">Loading book details...</div>
+      ) : null}
+
+      <BookDetailModal book={selectedBook} onClose={() => setSelectedBook(null)} />
     </div>
   );
 }

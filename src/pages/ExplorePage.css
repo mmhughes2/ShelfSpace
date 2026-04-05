@@ -71,6 +71,15 @@
   padding: 44px 0 80px;
 }
 
+.error-banner {
+  margin: 0 0 1.2rem;
+  padding: 1rem 1.1rem;
+  border-radius: 18px;
+  background: #fff1f1;
+  border: 1px solid #efc7c7;
+  color: #9b3b3b;
+}
+
 .book-section {
   margin-bottom: 54px;
 }
@@ -87,14 +96,62 @@
   letter-spacing: -0.07em;
 }
 
-.books-list {
-  display: flex;
-  flex-direction: column;
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
+}
+
+.loading-grid {
+  align-items: stretch;
+}
+
+.empty-state {
+  padding: 1.25rem;
+  border-radius: 20px;
+  background: #faf7f1;
+  border: 1px solid #e7dfd2;
+  color: #6a5a49;
+  text-align: center;
+}
+
+.skeleton-card {
+  min-height: 260px;
+  border-radius: 22px;
+  background: linear-gradient(90deg, #efede6 25%, #f8f6f1 50%, #efede6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+.modal-loader {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  transform: translateX(-50%);
+  z-index: 45;
+  padding: 0.85rem 1rem;
+  border-radius: 999px;
+  background: #050505;
+  color: #fff;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 @media (max-width: 920px) {
   .explore-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .books-grid {
     grid-template-columns: 1fr;
   }
 }

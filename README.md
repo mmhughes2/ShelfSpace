@@ -15,6 +15,8 @@ React version of the actual ShelfSpace project site for Project Part 8.
 
 1. Install Node.js if it is not already available.
 2. Run `npm install`
+3. Add a `.env` file if you want the Explore page to use your live Render backend:
+   `VITE_API_BASE_URL=https://your-render-service.onrender.com`
 3. Run `npm run dev`
 
 ## Before submitting

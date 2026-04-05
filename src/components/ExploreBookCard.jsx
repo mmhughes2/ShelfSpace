@@ -1,6 +1,6 @@
 import "./ExploreBookCard.css";
 
-function ExploreBookCard({ book }) {
+function ExploreBookCard({ book, onSelect }) {
   return (
     <article className="explore-book-card">
       <div className="explore-book-main">
@@ -16,8 +16,8 @@ function ExploreBookCard({ book }) {
         </div>
       </div>
 
-      <button className="add-btn" type="button">
-        Add to Shelf <strong>+</strong>
+      <button className="add-btn" type="button" onClick={() => onSelect(book.id)}>
+        View Details <strong>+</strong>
       </button>
     </article>
   );
