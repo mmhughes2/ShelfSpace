@@ -61,6 +61,19 @@
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
 }
 
+.hero-image-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f7f4ef;
+}
+
+.hero-image-card img {
+  width: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
 .feature {
   display: grid;
   grid-template-columns: minmax(280px, 420px) minmax(380px, 1fr);
