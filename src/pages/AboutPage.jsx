@@ -45,20 +45,20 @@ function AboutPage() {
           <div className="gallery-grid">
             <figure className="gallery-card">
               <img
-                src={`${base}assets/profile/friend1.png`}
-                alt="ShelfSpace member smiling with a book"
+                src={`${base}assets/about/friendly-book-discussion-cafe.png`}
+                alt="Friends having a book discussion at a cafe"
               />
             </figure>
             <figure className="gallery-card">
               <img
-                src={`${base}assets/profile/friend2.png`}
-                alt="ShelfSpace member browsing on a device"
+                src={`${base}assets/about/reading-cozy-library.png`}
+                alt="Reader enjoying a quiet moment in a cozy library"
               />
             </figure>
             <figure className="gallery-card">
               <img
-                src={`${base}assets/profile/friend3.png`}
-                alt="ShelfSpace community member portrait"
+                src={`${base}assets/about/reading-smiles-cafe.png`}
+                alt="Readers smiling together at a cafe table"
               />
             </figure>
           </div>
