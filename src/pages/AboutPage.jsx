@@ -12,7 +12,7 @@ function AboutPage() {
           <div className="story-grid">
             <div className="story-image-wrap">
               <img
-                src={`${base}assets/profile/profile.png`}
+                src={`${base}assets/about/ourstory.png`}
                 alt="Founder portrait"
                 className="story-image"
               />

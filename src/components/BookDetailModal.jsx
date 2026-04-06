@@ -24,7 +24,14 @@ function BookDetailModal({ book, onClose }) {
         </button>
 
         <div className="book-modal-top">
-          <img src={book.image} alt={`${book.title} cover`} />
+          <img
+            src={book.image}
+            alt={`${book.title} cover`}
+            onError={(event) => {
+              event.currentTarget.onerror = null;
+              event.currentTarget.src = book.fallbackImage;
+            }}
+          />
 
           <div className="book-modal-copy">
             <p className="section-label">Book Details</p>

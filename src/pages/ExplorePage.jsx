@@ -109,11 +109,11 @@ function ExplorePage() {
                 x
               </button>
             </label>
-            <p className="results-feedback">
-              {isLoading
-                ? "Loading the live ShelfSpace collection..."
-                : `${filteredBooks.length} books loaded from the backend.`}
-            </p>
+            {isLoading ? (
+              <p className="results-feedback">
+                Loading the live ShelfSpace collection...
+              </p>
+            ) : null}
           </div>
         </div>
       </section>

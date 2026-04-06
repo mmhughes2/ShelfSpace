@@ -7,6 +7,16 @@ export function getApiBaseUrl() {
   return API_BASE_URL;
 }
 
+function buildOpenLibraryCoverUrl(formats) {
+  const isbn = formats?.find((format) => format?.isbn)?.isbn;
+
+  if (!isbn) {
+    return null;
+  }
+
+  return `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg?default=false`;
+}
+
 export function buildImageUrl(imagePath) {
   if (!imagePath) {
     return `${import.meta.env.BASE_URL}assets/homepage/books.png`;
@@ -20,6 +30,8 @@ export function buildImageUrl(imagePath) {
 }
 
 export function normalizeBook(book) {
+  const formats = Array.isArray(book.formats) ? book.formats : [];
+
   return {
     id: book._id,
     title: book.title,
@@ -30,8 +42,9 @@ export function normalizeBook(book) {
     pageCount: book.page_count,
     description: book.description,
     features: Array.isArray(book.features) ? book.features : [],
-    formats: Array.isArray(book.formats) ? book.formats : [],
-    image: buildImageUrl(book.main_image),
+    formats,
+    image: buildOpenLibraryCoverUrl(formats) || buildImageUrl(book.main_image),
+    fallbackImage: buildImageUrl(book.main_image),
   };
 }
 

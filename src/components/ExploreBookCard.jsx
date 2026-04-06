@@ -4,7 +4,15 @@ function ExploreBookCard({ book, onSelect }) {
   return (
     <article className="explore-book-card">
       <div className="explore-book-main">
-        <img className="explore-book-cover" src={book.image} alt={book.title} />
+        <img
+          className="explore-book-cover"
+          src={book.image}
+          alt={book.title}
+          onError={(event) => {
+            event.currentTarget.onerror = null;
+            event.currentTarget.src = book.fallbackImage;
+          }}
+        />
         <div className="explore-book-info">
           <div className="explore-book-meta">
             <span className="genre-pill">{book.genre}</span>
