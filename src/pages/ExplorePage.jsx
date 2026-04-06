@@ -124,10 +124,6 @@ function ExplorePage() {
         <section className="book-section">
           <div className="section-header">
             <h2>Library Collection</h2>
-            <p>
-              Every book in this section is now loaded from the backend instead
-              of the old local JSON file.
-            </p>
           </div>
 
           {isLoading ? (
