@@ -15,12 +15,11 @@ function Slideshow({ slides }) {
   return (
     <section className="slideshow-section" aria-label="ShelfSpace slideshow">
       <div className="slideshow-copy">
-        <p className="section-label">Featured Preview</p>
         <h2>See how ShelfSpace moves from shelf tracking to shared reading.</h2>
         <p>
-          This slideshow is the Part 9 interactive feature. It rotates through
-          key parts of the experience while still letting the user pick a slide
-          manually.
+          ShelfSpace brings together personal reading goals, book discovery,
+          and community moments in one welcoming space. Browse the slides to
+          preview the different parts of the experience.
         </p>
       </div>
 
