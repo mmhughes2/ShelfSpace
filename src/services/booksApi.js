@@ -71,12 +71,24 @@ export async function fetchBookById(id) {
 }
 
 export async function createBook(bookPayload) {
+  const formData = new FormData();
+
+  Object.entries(bookPayload).forEach(([key, value]) => {
+    if (value === undefined || value === null || value === "") {
+      return;
+    }
+
+    if (key === "features" || key === "formats") {
+      formData.append(key, JSON.stringify(value));
+      return;
+    }
+
+    formData.append(key, value);
+  });
+
   const response = await fetch(`${API_BASE_URL}/api/books`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(bookPayload),
+    body: formData,
   });
 
   const data = await response.json();
@@ -89,4 +101,18 @@ export async function createBook(bookPayload) {
     message: data.message,
     book: normalizeBook(data.book),
   };
+}
+
+export async function deleteBook(id) {
+  const response = await fetch(`${API_BASE_URL}/api/books/${id}`, {
+    method: "DELETE",
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data?.message || "Unable to remove book.");
+  }
+
+  return data;
 }

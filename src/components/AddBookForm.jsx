@@ -106,7 +106,6 @@ function validatePayload(values) {
       publication_year: publicationYear,
       page_count: pageCount,
       rating,
-      main_image: "/images/books.png",
       description: values.description.trim(),
       features: trimmedFeatures,
       formats: [
@@ -155,18 +154,11 @@ function AddBookForm({ onBookAdded }) {
     try {
       setErrors({});
       setIsSubmitting(true);
-      const result = await createBook(payload);
-      const previewUrl = selectedCover ? URL.createObjectURL(selectedCover) : null;
-
-      onBookAdded(
-        previewUrl
-          ? {
-              ...result.book,
-              image: previewUrl,
-              fallbackImage: previewUrl,
-            }
-          : result.book
-      );
+      const result = await createBook({
+        ...payload,
+        cover: selectedCover || undefined,
+      });
+      onBookAdded(result.book);
       setValues(initialValues);
       setSelectedCover(null);
       setIsSuccess(true);

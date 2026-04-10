@@ -87,6 +87,22 @@
   line-height: 1;
 }
 
+.explore-book-actions {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.remove-btn {
+  min-width: 196px;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid #e2d5cf;
+  border-radius: 8px;
+  background: #fff7f5;
+  color: #934444;
+  cursor: pointer;
+}
+
 @media (max-width: 920px) {
   .explore-book-card {
     flex-direction: column;
@@ -94,6 +110,10 @@
   }
 
   .add-btn {
+    width: 100%;
+  }
+
+  .remove-btn {
     width: 100%;
   }
 }

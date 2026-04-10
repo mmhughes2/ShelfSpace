@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import AddBookForm from "../components/AddBookForm";
 import BookDetailModal from "../components/BookDetailModal";
 import ExploreBookCard from "../components/ExploreBookCard";
-import { fetchBookById, fetchBooks } from "../services/booksApi";
+import { deleteBook, fetchBookById, fetchBooks } from "../services/booksApi";
 import "./ExplorePage.css";
 
 function ExplorePage() {
@@ -71,6 +71,23 @@ function ExplorePage() {
       setErrorMessage("The selected book details could not be loaded.");
     } finally {
       setIsModalLoading(false);
+    }
+  }
+
+  async function handleRemoveBook(id) {
+    const confirmed = window.confirm("Remove this book from ShelfSpace?");
+
+    if (!confirmed) {
+      return;
+    }
+
+    try {
+      await deleteBook(id);
+      setBooks((current) => current.filter((book) => book.id !== id));
+      setSelectedBook((current) => (current?.id === id ? null : current));
+      setErrorMessage("");
+    } catch (error) {
+      setErrorMessage("The selected book could not be removed.");
     }
   }
 
@@ -144,7 +161,12 @@ function ExplorePage() {
           ) : (
             <div className="books-grid">
               {filteredBooks.map((book) => (
-                <ExploreBookCard key={book.id} book={book} onSelect={handleSelectBook} />
+                <ExploreBookCard
+                  key={book.id}
+                  book={book}
+                  onSelect={handleSelectBook}
+                  onRemove={handleRemoveBook}
+                />
               ))}
             </div>
           )}
@@ -167,6 +189,7 @@ function ExplorePage() {
                   key={`spotlight-${book.id}`}
                   book={book}
                   onSelect={handleSelectBook}
+                  onRemove={handleRemoveBook}
                 />
               ))}
             </div>
