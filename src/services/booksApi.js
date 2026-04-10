@@ -69,3 +69,24 @@ export async function fetchBookById(id) {
   const data = await response.json();
   return normalizeBook(data);
 }
+
+export async function createBook(bookPayload) {
+  const response = await fetch(`${API_BASE_URL}/api/books`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(bookPayload),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data?.errors?.join(" ") || "Unable to create book.");
+  }
+
+  return {
+    message: data.message,
+    book: normalizeBook(data.book),
+  };
+}

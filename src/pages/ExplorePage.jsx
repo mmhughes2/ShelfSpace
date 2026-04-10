@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import AddBookForm from "../components/AddBookForm";
 import BookDetailModal from "../components/BookDetailModal";
 import ExploreBookCard from "../components/ExploreBookCard";
 import { fetchBookById, fetchBooks } from "../services/booksApi";
@@ -73,16 +74,17 @@ function ExplorePage() {
     }
   }
 
+  function handleBookAdded(book) {
+    setBooks((current) => [book, ...current]);
+    setSearchValue("");
+  }
+
   return (
     <div className="explore-page">
       <section className="explore-hero">
         <div className="explore-inner">
           <div className="explore-copy">
             <h1>Explore</h1>
-            <p>
-              Browse fresh book picks from the live ShelfSpace server, search by
-              title or genre, and open each book for a full detail view.
-            </p>
           </div>
 
           <div className="search-shell">
@@ -121,6 +123,8 @@ function ExplorePage() {
       <main className="explore-content">
         {errorMessage ? <p className="error-banner">{errorMessage}</p> : null}
 
+        <AddBookForm onBookAdded={handleBookAdded} />
+
         <section className="book-section">
           <div className="section-header">
             <h2>Library Collection</h2>
@@ -149,10 +153,6 @@ function ExplorePage() {
         <section className="book-section">
           <div className="section-header">
             <h2>Spotlight Picks</h2>
-            <p>
-              Top-rated titles from the same backend collection, presented as a
-              second styled shelf for visual variety.
-            </p>
           </div>
 
           {spotlightBooks.length === 0 ? (

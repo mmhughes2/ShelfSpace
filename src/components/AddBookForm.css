@@ -1,0 +1,102 @@
+.add-book-panel {
+  margin: 0 0 3rem;
+  padding: 1.6rem;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #faf7f1, #f1efe8);
+  border: 1px solid #e5dfd4;
+  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.08);
+}
+
+.add-book-copy {
+  max-width: 48rem;
+  margin-bottom: 1.4rem;
+}
+
+.add-book-copy h2 {
+  margin: 0 0 0.7rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 0.96;
+  letter-spacing: -0.06em;
+}
+
+.add-book-copy p:last-child {
+  margin: 0;
+  color: #5c5c59;
+  line-height: 1.7;
+}
+
+.add-book-form {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.add-book-form label {
+  display: grid;
+  gap: 0.45rem;
+  font-weight: 600;
+}
+
+.add-book-form input,
+.add-book-form textarea {
+  width: 100%;
+  border: 1px solid #ded8ce;
+  border-radius: 16px;
+  background: #fffdf9;
+  padding: 0.85rem 0.95rem;
+}
+
+.add-book-form small {
+  color: #a24646;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-footer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.add-book-submit {
+  min-width: 180px;
+  border: none;
+  border-radius: 16px;
+  padding: 0.95rem 1.2rem;
+  background: #111;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.add-book-submit:disabled {
+  opacity: 0.75;
+  cursor: wait;
+}
+
+.form-message {
+  margin: 0;
+}
+
+.form-message.success {
+  color: #26623f;
+}
+
+.form-message.error {
+  color: #a24646;
+}
+
+@media (max-width: 900px) {
+  .add-book-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .add-book-form {
+    grid-template-columns: 1fr;
+  }
+}
