@@ -38,12 +38,33 @@
 }
 
 .add-book-form input,
-.add-book-form textarea {
+.add-book-form textarea,
+.add-book-form select {
   width: 100%;
   border: 1px solid #ded8ce;
   border-radius: 16px;
   background: #fffdf9;
   padding: 0.85rem 0.95rem;
+}
+
+.star-rating {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.star-button {
+  border: none;
+  background: transparent;
+  color: #d7d1c5;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.star-button-active {
+  color: #d6a437;
 }
 
 .add-book-form small {

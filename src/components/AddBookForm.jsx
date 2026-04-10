@@ -2,10 +2,33 @@ import { useState } from "react";
 import { createBook } from "../services/booksApi";
 import "./AddBookForm.css";
 
+const genreOptions = [
+  "Contemporary Fiction",
+  "Historical Fiction",
+  "Literary Fiction",
+  "Fantasy",
+  "Science Fiction",
+  "Thriller",
+  "Mystery",
+  "Romance",
+  "Memoir",
+  "Young Adult Fiction",
+  "Contemporary Fantasy",
+  "Nonfiction",
+];
+
+const formatOptions = [
+  "Hardcover",
+  "Paperback",
+  "Audiobook",
+  "eBook",
+  "Special Edition",
+];
+
 const initialValues = {
   title: "",
   author: "",
-  genre: "",
+  genre: "Contemporary Fiction",
   publication_year: "",
   page_count: "",
   rating: "",
@@ -48,10 +71,8 @@ function validatePayload(values) {
   }
 
   const rating = Number(values.rating);
-  if (Number.isNaN(rating) || rating < 0 || rating > 5) {
-    errors.rating = "Rating must be between 0 and 5.";
-  } else if (!/^\d+(\.\d)?$/.test(values.rating.trim())) {
-    errors.rating = "Rating can only use one decimal place.";
+  if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
+    errors.rating = "Choose a star rating from 1 to 5.";
   }
 
   if (values.description.trim().length < 10 || values.description.trim().length > 600) {
@@ -116,6 +137,10 @@ function AddBookForm({ onBookAdded }) {
     setSelectedCover(event.target.files?.[0] || null);
   }
 
+  function handleRatingSelect(starValue) {
+    setValues((current) => ({ ...current, rating: String(starValue) }));
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
     const { errors: validationErrors, payload } = validatePayload(values);
@@ -175,7 +200,13 @@ function AddBookForm({ onBookAdded }) {
 
         <label>
           <span>Genre</span>
-          <input name="genre" value={values.genre} onChange={handleChange} />
+          <select name="genre" value={values.genre} onChange={handleChange}>
+            {genreOptions.map((genre) => (
+              <option key={genre} value={genre}>
+                {genre}
+              </option>
+            ))}
+          </select>
           {errors.genre ? <small>{errors.genre}</small> : null}
         </label>
 
@@ -197,7 +228,23 @@ function AddBookForm({ onBookAdded }) {
 
         <label>
           <span>Rating</span>
-          <input name="rating" value={values.rating} onChange={handleChange} />
+          <div className="star-rating" role="radiogroup" aria-label="Book rating">
+            {[1, 2, 3, 4, 5].map((starValue) => (
+              <button
+                key={starValue}
+                type="button"
+                className={
+                  Number(values.rating) >= starValue
+                    ? "star-button star-button-active"
+                    : "star-button"
+                }
+                onClick={() => handleRatingSelect(starValue)}
+                aria-label={`Set rating to ${starValue} star${starValue > 1 ? "s" : ""}`}
+              >
+                ★
+              </button>
+            ))}
+          </div>
           {errors.rating ? <small>{errors.rating}</small> : null}
         </label>
 
@@ -230,11 +277,13 @@ function AddBookForm({ onBookAdded }) {
 
         <label>
           <span>Format Type</span>
-          <input
-            name="format_type"
-            value={values.format_type}
-            onChange={handleChange}
-          />
+          <select name="format_type" value={values.format_type} onChange={handleChange}>
+            {formatOptions.map((format) => (
+              <option key={format} value={format}>
+                {format}
+              </option>
+            ))}
+          </select>
           {errors.format_type ? <small>{errors.format_type}</small> : null}
         </label>
 
