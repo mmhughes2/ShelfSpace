@@ -12,7 +12,7 @@ function ProfilePage() {
         <section className="panel profile-card">
           <div className="profile-left">
             <img
-              src={`${base}assets/profile/profile.png`}
+              src={`${base}assets/profile/radiant-smile-profile.png`}
               alt="Sasha Jordan"
               className="profile-photo"
             />
