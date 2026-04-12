@@ -35,7 +35,8 @@
   height: 136px;
   border-radius: 50%;
   object-fit: cover;
-  border: 5px solid #efefef;
+  border: 2px solid #ece7df;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
 }
 
 .profile-copy h1 {
