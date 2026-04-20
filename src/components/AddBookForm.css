@@ -93,6 +93,11 @@
   cursor: pointer;
 }
 
+.secondary-submit {
+  background: #ece5d7;
+  color: #3d3529;
+}
+
 .add-book-submit:disabled {
   opacity: 0.75;
   cursor: wait;

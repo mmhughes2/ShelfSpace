@@ -103,6 +103,39 @@ export async function createBook(bookPayload) {
   };
 }
 
+export async function updateBook(id, bookPayload) {
+  const formData = new FormData();
+
+  Object.entries(bookPayload).forEach(([key, value]) => {
+    if (value === undefined || value === null || value === "") {
+      return;
+    }
+
+    if (key === "features" || key === "formats") {
+      formData.append(key, JSON.stringify(value));
+      return;
+    }
+
+    formData.append(key, value);
+  });
+
+  const response = await fetch(`${API_BASE_URL}/api/books/${id}`, {
+    method: "PUT",
+    body: formData,
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data?.errors?.join(" ") || data?.message || "Unable to update book.");
+  }
+
+  return {
+    message: data.message,
+    book: normalizeBook(data.book),
+  };
+}
+
 export async function deleteBook(id) {
   const response = await fetch(`${API_BASE_URL}/api/books/${id}`, {
     method: "DELETE",
