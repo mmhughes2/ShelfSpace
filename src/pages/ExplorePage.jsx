@@ -12,6 +12,8 @@ function ExplorePage() {
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedBook, setSelectedBook] = useState(null);
   const [isModalLoading, setIsModalLoading] = useState(false);
+  const [editingBook, setEditingBook] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
     let ignore = false;
@@ -85,15 +87,38 @@ function ExplorePage() {
       await deleteBook(id);
       setBooks((current) => current.filter((book) => book.id !== id));
       setSelectedBook((current) => (current?.id === id ? null : current));
+      setEditingBook((current) => (current?.id === id ? null : current));
       setErrorMessage("");
+      setSuccessMessage("Book removed successfully.");
     } catch (error) {
       setErrorMessage("The selected book could not be removed.");
+      setSuccessMessage("");
     }
   }
 
   function handleBookAdded(book) {
     setBooks((current) => [book, ...current]);
     setSearchValue("");
+    setEditingBook(null);
+    setErrorMessage("");
+    setSuccessMessage("Book added successfully.");
+  }
+
+  function handleStartEdit(book) {
+    setEditingBook(book);
+    setErrorMessage("");
+    setSuccessMessage("");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function handleBookUpdated(updatedBook) {
+    setBooks((current) =>
+      current.map((book) => (book.id === updatedBook.id ? updatedBook : book))
+    );
+    setSelectedBook((current) => (current?.id === updatedBook.id ? updatedBook : current));
+    setEditingBook(updatedBook);
+    setErrorMessage("");
+    setSuccessMessage("Book updated successfully.");
   }
 
   return (
@@ -139,8 +164,29 @@ function ExplorePage() {
 
       <main className="explore-content">
         {errorMessage ? <p className="error-banner">{errorMessage}</p> : null}
+        {successMessage ? <p className="success-banner">{successMessage}</p> : null}
 
-        <AddBookForm onBookAdded={handleBookAdded} />
+        <AddBookForm
+          mode={editingBook ? "edit" : "create"}
+          book={editingBook}
+          heading={
+            editingBook
+              ? `Edit "${editingBook.title}"`
+              : "Add a new title to ShelfSpace"
+          }
+          submitLabel={editingBook ? "Save Changes" : "Add Book"}
+          successMessage={
+            editingBook
+              ? "Book updated successfully and the collection has been refreshed."
+              : "Book added successfully and the collection has been updated."
+          }
+          onBookAdded={handleBookAdded}
+          onBookUpdated={handleBookUpdated}
+          onCancel={() => {
+            setEditingBook(null);
+            setSuccessMessage("");
+          }}
+        />
 
         <section className="book-section">
           <div className="section-header">
@@ -165,6 +211,7 @@ function ExplorePage() {
                   key={book.id}
                   book={book}
                   onSelect={handleSelectBook}
+                  onEdit={handleStartEdit}
                   onRemove={handleRemoveBook}
                 />
               ))}
@@ -189,6 +236,7 @@ function ExplorePage() {
                   key={`spotlight-${book.id}`}
                   book={book}
                   onSelect={handleSelectBook}
+                  onEdit={handleStartEdit}
                   onRemove={handleRemoveBook}
                 />
               ))}

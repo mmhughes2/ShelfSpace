@@ -80,6 +80,15 @@
   color: #9b3b3b;
 }
 
+.success-banner {
+  margin: 0 0 1.2rem;
+  padding: 1rem 1.1rem;
+  border-radius: 18px;
+  background: #eef8f0;
+  border: 1px solid #b6ddbf;
+  color: #2e7041;
+}
+
 .book-section {
   margin-bottom: 54px;
 }
