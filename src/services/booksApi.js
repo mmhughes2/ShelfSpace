@@ -31,6 +31,8 @@ export function buildImageUrl(imagePath) {
 
 export function normalizeBook(book) {
   const formats = Array.isArray(book.formats) ? book.formats : [];
+  const fallbackImage = buildImageUrl(book.main_image);
+  const image = buildOpenLibraryCoverUrl(formats) || fallbackImage;
 
   return {
     id: book._id,
@@ -41,10 +43,11 @@ export function normalizeBook(book) {
     publicationYear: book.publication_year,
     pageCount: book.page_count,
     description: book.description,
+    tagline: book.tagline || book.description,
     features: Array.isArray(book.features) ? book.features : [],
     formats,
-    image: buildOpenLibraryCoverUrl(formats) || buildImageUrl(book.main_image),
-    fallbackImage: buildImageUrl(book.main_image),
+    image,
+    fallbackImage,
   };
 }
 

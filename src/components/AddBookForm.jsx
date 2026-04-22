@@ -21,19 +21,36 @@ function AddBookForm({
 }) {
   const [values, setValues] = useState(() => mapBookToFormValues(book));
   const [selectedCover, setSelectedCover] = useState(null);
+  const [coverPreview, setCoverPreview] = useState("");
   const [errors, setErrors] = useState({});
   const [statusMessage, setStatusMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isEditMode = mode === "edit";
+  const existingCover = book?.image || "";
 
   useEffect(() => {
     setValues(mapBookToFormValues(book));
     setSelectedCover(null);
+    setCoverPreview("");
     setErrors({});
     setStatusMessage("");
     setIsSuccess(false);
   }, [book]);
+
+  useEffect(() => {
+    if (!selectedCover) {
+      setCoverPreview("");
+      return undefined;
+    }
+
+    const objectUrl = URL.createObjectURL(selectedCover);
+    setCoverPreview(objectUrl);
+
+    return () => {
+      URL.revokeObjectURL(objectUrl);
+    };
+  }, [selectedCover]);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -43,6 +60,7 @@ function AddBookForm({
 
   function handleCoverChange(event) {
     setSelectedCover(event.target.files?.[0] || null);
+    setErrors((current) => ({ ...current, cover: "" }));
   }
 
   function handleRatingSelect(starValue) {
@@ -52,7 +70,9 @@ function AddBookForm({
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const { errors: validationErrors, payload } = validateBookPayload(values);
+    const { errors: validationErrors, payload } = validateBookPayload(values, {
+      requireCover: !isEditMode && !selectedCover,
+    });
 
     if (Object.keys(validationErrors).length) {
       setErrors(validationErrors);
@@ -80,6 +100,7 @@ function AddBookForm({
         onBookAdded?.(result.book);
         setValues(initialBookFormValues);
         setSelectedCover(null);
+        setCoverPreview("");
       }
 
       setIsSuccess(true);
@@ -104,6 +125,35 @@ function AddBookForm({
       </div>
 
       <form className="add-book-form" onSubmit={handleSubmit} noValidate>
+        <div className="full-width cover-preview-panel">
+          <div className="cover-preview-frame">
+            {coverPreview || existingCover ? (
+              <img
+                src={coverPreview || existingCover}
+                alt={
+                  values.title
+                    ? `${values.title} cover preview`
+                    : "Selected book cover preview"
+                }
+              />
+            ) : (
+              <div className="cover-preview-placeholder">
+                Upload a cover so it appears in your shelf cards and book details.
+              </div>
+            )}
+          </div>
+          <div className="cover-preview-copy">
+            <strong>{isEditMode ? "Current cover" : "Cover preview"}</strong>
+            <span>
+              {selectedCover
+                ? `Selected file: ${selectedCover.name}`
+                : isEditMode
+                  ? "Choose a new image only if you want to replace the current one."
+                  : "A cover image is required for new books."}
+            </span>
+          </div>
+        </div>
+
         <label>
           <span>Title</span>
           <input name="title" value={values.title} onChange={handleChange} />
@@ -169,6 +219,7 @@ function AddBookForm({
         <label className="full-width">
           <span>{isEditMode ? "Replace Cover" : "Add Cover"}</span>
           <input type="file" accept="image/*" onChange={handleCoverChange} />
+          {errors.cover ? <small>{errors.cover}</small> : null}
         </label>
 
         <label className="full-width">

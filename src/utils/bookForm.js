@@ -71,12 +71,17 @@ export function mapBookToFormValues(book) {
   };
 }
 
-export function validateBookPayload(values) {
+export function validateBookPayload(values, options = {}) {
+  const { requireCover = false } = options;
   const errors = {};
   const trimmedFeatures = values.features
     .split(",")
     .map((feature) => feature.trim())
     .filter(Boolean);
+
+  if (requireCover) {
+    errors.cover = "Add a book cover image before submitting.";
+  }
 
   if (values.title.trim().length < 2 || values.title.trim().length > 120) {
     errors.title = "Title must be between 2 and 120 characters.";
